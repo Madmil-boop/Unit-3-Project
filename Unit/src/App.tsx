@@ -7,22 +7,22 @@ function App() {
 
 
   function handleToggleTheme() {
-    setDarkMode(!darkMode);
+    setDarkMode(!darkMode); 
   }
 
   return (
     <>
-    <div className={darkMode ? 'dark-theme' : 'light-theme'}>
+    <div className={darkMode ? 'app dark' : 'app'}> 
 
-      <header>
+      <header className="header">
         < h1>Book List App</h1>
-        <button onClick={handleToggleTheme}>
+        <button className="toggle-btn" onClick={handleToggleTheme}>
           {darkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         </button>
       </header>
 
-      <main>
-        <div className="book-list">
+      <main className="main">
+        <div className="list-side">
           <h2>My Books</h2>
           <ul>
             {/* {books.map((book, index) => ( */}
@@ -31,7 +31,7 @@ function App() {
           </ul> 
         </div>
 
-        <div className="add-book-form">
+        <div className="form-side">
           <h2>Add a New Book</h2>
           <form>
             <input type="text" placeholder="Title" />
