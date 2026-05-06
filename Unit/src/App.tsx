@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function createBook(title: string, author: string, status: string) {
@@ -11,11 +11,26 @@ function createBook(title: string, author: string, status: string) {
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [books, setBooks] = useState<{id: string, title: string, author: string, status: string}[]>([]);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+  const [books, setBooks] = useState<{id: string, title: string, author: string, status: string}[]>(() => {
+  const saved = localStorage.getItem("books");
+    return saved ? JSON.parse(saved) : [];
+  });
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [status, setStatus] = useState<string>("to-read");
+
+
+
+  useEffect(() => {
+    localStorage.setItem("books", JSON.stringify(books));
+  }, [books]);
+
+  useEffect(() => {
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   function handleToggleTheme() {
     setDarkMode(!darkMode);
