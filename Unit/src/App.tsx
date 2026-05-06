@@ -14,10 +14,12 @@ function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
   });
+
   const [books, setBooks] = useState<{id: string, title: string, author: string, status: string}[]>(() => {
   const saved = localStorage.getItem("books");
     return saved ? JSON.parse(saved) : [];
   });
+
   const [title, setTitle] = useState<string>("");
   const [author, setAuthor] = useState<string>("");
   const [status, setStatus] = useState<string>("to-read");
@@ -31,6 +33,8 @@ function App() {
   useEffect(() => {
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
+
+
 
   function handleToggleTheme() {
     setDarkMode(!darkMode);
@@ -62,8 +66,9 @@ function App() {
               <tr>
                 <th>Title</th>
                 <th>Author</th>
-                <th>Status</th>
-                <th>Actions</th>
+                <th>Status</th> 
+                {/* Could have made status editable */}
+                <th>Actions</th> 
               </tr>
             </thead>
             <tbody>
